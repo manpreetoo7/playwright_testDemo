@@ -21,5 +21,4 @@ test("adding items in cart", async ({ page }) => {
 
 test.afterAll(async () => {
     await page.close();
-    await browser.close();
 });
