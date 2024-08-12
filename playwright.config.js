@@ -1,12 +1,17 @@
 // @ts-check
 const { defineConfig, devices } = require('@playwright/test');
-
+const {on} =require('events');
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
 // require('dotenv').config({ path: path.resolve(__dirname, '.env') });
-
+if (!process.env.NODE_ENV){
+  require('dotenv').config({path:`${__dirname}//src//config//.env`});
+}
+else{
+  require('dotenv').config({path:`${__dirname}//src//config//.env${process.env.NODE_ENV}`});
+}
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
@@ -28,7 +33,9 @@ module.exports = defineConfig({
     baseURL: 'https://www.saucedemo.com',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: 'on',
+    screenshot : 'only-on-failure',
+    video :"on"
   },
 
   /* Configure projects for major browsers */
