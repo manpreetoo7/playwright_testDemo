@@ -1,22 +1,24 @@
 // @ts-check
-const { defineConfig, devices } = require('@playwright/test');
-const {on} =require('events');
+const { defineConfig, devices } = require("@playwright/test");
+const { on } = require("events");
+const { json } = require("stream/consumers");
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
 // require('dotenv').config({ path: path.resolve(__dirname, '.env') });
-if (!process.env.NODE_ENV){
-  require('dotenv').config({path:`${__dirname}//src//config//.env`});
-}
-else{
-  require('dotenv').config({path:`${__dirname}//src//config//.env${process.env.NODE_ENV}`});
+if (!process.env.NODE_ENV) {
+  require("dotenv").config({ path: `${__dirname}//src//config//.env` });
+} else {
+  require("dotenv").config({
+    path: `${__dirname}//src//config//.env${process.env.NODE_ENV}`,
+  });
 }
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
-module.exports = defineConfig({
-  testDir: './src/tests',
+export default defineConfig({
+  testDir: "./src/tests",
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -26,33 +28,57 @@ module.exports = defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+    ['list'],
+    ["html"],
+    ['json',{ outputFile : 'jsonReports/test-results.json'}],
+    ["allure-playwright", {
+      detail: true,
+      resultsDir: "my-allure-results",
+      suiteTitle: false,
+      links: {
+        link: {
+          urlTemplate: "https://github.com/allure-framework/allure-js/blob/main/%s",
+        },
+        issue: {
+          urlTemplate: "https://github.com/allure-framework/allure-js/issues/%s",
+          nameTemplate: "ISSUE-%s",
+        },
+      },
+      categories: [
+        {
+          name: "Missing file errors",
+          messageRegex: /^ENOENT: no such file or directory/,
+        },
+      ],
+    },],
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'https://www.saucedemo.com',
+    baseURL: "https://www.saucedemo.com",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on',
-    screenshot : 'only-on-failure',
-    video :"on"
+    trace: "on",
+    screenshot: "only-on-failure",
+    video: "on",
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
     },
 
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      name: "firefox",
+      use: { ...devices["Desktop Firefox"] },
     },
 
     {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      name: "webkit",
+      use: { ...devices["Desktop Safari"] },
     },
 
     /* Test against mobile viewports. */
@@ -83,4 +109,3 @@ module.exports = defineConfig({
   //   reuseExistingServer: !process.env.CI,
   // },
 });
-
