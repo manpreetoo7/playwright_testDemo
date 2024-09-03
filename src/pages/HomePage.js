@@ -13,10 +13,10 @@ export default class HomePage {
     this.saueLabsBagpag = '[data-test="add-to-cart-sauce-labs-backpack"]';
     this.sauceLabTshirt = '[data-test="add-to-cart-sauce-labs-bolt-t-shirt"]';
     this.cart = '[data-test="shopping-cart-link"]';
-    this.currentSort ='[data-test="active-option"]';
-    this.dropdown ='[data-test="active-option"]';
+    this.currentSort = '[data-test="active-option"]';
+    this.dropdown = '[data-test="active-option"]';
     this.sidemenu = '[id="react-burger-menu-btn"]';
-    this.sideMenuCross ='[id="react-burger-cross-btn"]';
+    this.sideMenuCross = '[id="react-burger-cross-btn"]';
   }
 
   async expectPageTobeVisible() {
@@ -28,11 +28,11 @@ export default class HomePage {
     await this.action.clickElement(this.sauceLabTshirt);
     await this.action.clickElement(this.saueLabsBagpag);
     await this.assert.expectElementToBeVisible(this.cart);
-    await this.assert.expectTextToBe(this.cart,'2');
+    await this.assert.expectTextToBe(this.cart, "2");
   }
 
   async navigateToTheCart() {
-   await this.action.clickElement(this.cart);
+    await this.action.clickElement(this.cart);
   }
 
   async loginWithValidCredentials() {
@@ -44,11 +44,11 @@ export default class HomePage {
     await homePage.expectPageTobeVisible();
   }
 
-  async selectOptionFromDropdown(option){
+  async selectOptionFromDropdown(option) {
     await this.action.selectFromDopdown(this.dropdown, option);
-    await this.assert.expectTextToBe(this.currentSort,option)
+    await this.assert.expectTextToBe(this.currentSort, option);
   }
-  async clickSideMenu(){
+  async clickSideMenu() {
     await this.action.clickElement(this.sidemenu);
     await this.assert.expectElementToBeVisible(this.sideMenuCross);
   }

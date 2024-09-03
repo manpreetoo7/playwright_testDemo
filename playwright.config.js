@@ -29,29 +29,34 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ['list'],
+    ["list"],
     ["html"],
-    ['json',{ outputFile : 'jsonReports/test-results.json'}],
-    ["allure-playwright", {
-      detail: true,
-      resultsDir: "my-allure-results",
-      suiteTitle: false,
-      links: {
-        link: {
-          urlTemplate: "https://github.com/allure-framework/allure-js/blob/main/%s",
+    ["json", { outputFile: "jsonReports/test-results.json" }],
+    [
+      "allure-playwright",
+      {
+        detail: true,
+        resultsDir: "my-allure-results",
+        suiteTitle: false,
+        links: {
+          link: {
+            urlTemplate:
+              "https://github.com/allure-framework/allure-js/blob/main/%s",
+          },
+          issue: {
+            urlTemplate:
+              "https://github.com/allure-framework/allure-js/issues/%s",
+            nameTemplate: "ISSUE-%s",
+          },
         },
-        issue: {
-          urlTemplate: "https://github.com/allure-framework/allure-js/issues/%s",
-          nameTemplate: "ISSUE-%s",
-        },
+        categories: [
+          {
+            name: "Missing file errors",
+            messageRegex: /^ENOENT: no such file or directory/,
+          },
+        ],
       },
-      categories: [
-        {
-          name: "Missing file errors",
-          messageRegex: /^ENOENT: no such file or directory/,
-        },
-      ],
-    },],
+    ],
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
