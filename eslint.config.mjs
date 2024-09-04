@@ -1,23 +1,25 @@
 import pluginJs from '@eslint/js';
 import globals from 'globals';
 
-export default {
-  languageOptions: {
-    globals: {
-      ...globals.node, // Include Node.js global variables like `process`, `module`, etc.
+const recommendedJs = pluginJs.configs.recommended;
+
+export default [
+  {
+    languageOptions: {
+      globals: {
+        ...globals.node, // Include Node.js global variables
+      },
+      ecmaVersion: 'latest', // Ensure support for modern JavaScript features
+      sourceType: 'module',  // Specify ES Module syntax
     },
-    ecmaVersion: 'latest', // Ensure support for modern JavaScript features
-    sourceType: 'module',  // Specify ES Module syntax
+    plugins: {
+      '@eslint/js': pluginJs, // Register plugins using the new object format
+    },
+    rules: {
+      'no-undef': 'error', // Ensure undefined variables are flagged
+      // Add or modify rules as needed
+    },
   },
-  plugins: {
-    // Register plugins using the new object format
-    '@eslint/js': pluginJs,
-  },
-  extends: [
-    '@eslint/js/recommended', // Use the recommended config from the '@eslint/js' plugin
-  ],
-  rules: {
-    'no-undef': 'error', // Ensure that undefined variables are flagged
-    // Add or modify rules as needed
-  },
-};
+  // Directly include configurations you want to extend from
+  recommendedJs,
+];
