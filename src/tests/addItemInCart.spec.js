@@ -13,7 +13,7 @@ test.beforeEach(async () => {
   await homePage.loginWithValidCredentials();
 });
 
-test("adding items in cart", async ({ page }) => {
+test("adding items in cart", async () => {
   await homePage.addItemInPackback();
   await homePage.navigateToTheCart();
 });

@@ -16,8 +16,15 @@ export default [
       '@eslint/js': pluginJs, // Register plugins using the new object format
     },
     rules: {
-      'no-undef': 'error', // Ensure undefined variables are flagged
-      // Add or modify rules as needed
+      'no-unused-vars': [
+        'warn', 
+        { 
+          vars: 'all', 
+          args: 'after-used', 
+          ignoreRestSiblings: true,
+          caughtErrors: 'none'
+        }
+      ],
     },
   },
   // Directly include configurations you want to extend from

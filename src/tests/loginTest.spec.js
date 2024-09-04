@@ -16,6 +16,6 @@ test("Login with wrong credentials", async ({ page }) => {
   await loginPage.navigateToLoginPage();
   await loginPage.fillUsername(process.env.useridWrong);
   await loginPage.fillPasswaord(process.env.password);
-  const homePage = await loginPage.clickLoginButton();
+  await loginPage.clickLoginButton();
   await loginPage.wrongCredentialsError();
 });

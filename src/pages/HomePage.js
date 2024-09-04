@@ -1,4 +1,3 @@
-import { Page } from "@playwright/test";
 import LoginPage from "./LoginPage";
 import ActionClass from "../helper/actionClass";
 import AssertionHelper from "../helper/assertion";

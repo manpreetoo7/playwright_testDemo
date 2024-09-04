@@ -1,7 +1,5 @@
 // @ts-check
 const { defineConfig, devices } = require("@playwright/test");
-const { on } = require("events");
-const { json } = require("stream/consumers");
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
