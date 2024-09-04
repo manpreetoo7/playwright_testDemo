@@ -1,5 +1,5 @@
-import pluginJs from '@eslint/js';
-import globals from 'globals';
+import pluginJs from "@eslint/js";
+import globals from "globals";
 
 const recommendedJs = pluginJs.configs.recommended;
 
@@ -9,21 +9,21 @@ export default [
       globals: {
         ...globals.node, // Include Node.js global variables
       },
-      ecmaVersion: 'latest', // Ensure support for modern JavaScript features
-      sourceType: 'module',  // Specify ES Module syntax
+      ecmaVersion: "latest", // Ensure support for modern JavaScript features
+      sourceType: "module", // Specify ES Module syntax
     },
     plugins: {
-      '@eslint/js': pluginJs, // Register plugins using the new object format
+      "@eslint/js": pluginJs, // Register plugins using the new object format
     },
     rules: {
-      'no-unused-vars': [
-        'warn', 
-        { 
-          vars: 'all', 
-          args: 'after-used', 
+      "no-unused-vars": [
+        "warn",
+        {
+          vars: "all",
+          args: "after-used",
           ignoreRestSiblings: true,
-          caughtErrors: 'none'
-        }
+          caughtErrors: "none",
+        },
       ],
     },
   },
