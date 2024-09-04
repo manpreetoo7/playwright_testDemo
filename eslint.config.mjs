@@ -1,30 +1,23 @@
-import globals from 'globals';
 import pluginJs from '@eslint/js';
+import globals from 'globals';
 
 export default {
   languageOptions: {
     globals: {
-      ...globals.node,  // Include Node.js global variables like `process`, `module`, etc.
+      ...globals.node, // Include Node.js global variables like `process`, `module`, etc.
     },
-    ecmaVersion: 'latest',  // Ensure support for modern JavaScript features
-    sourceType: 'module',   // Specify ES Module syntax
+    ecmaVersion: 'latest', // Ensure support for modern JavaScript features
+    sourceType: 'module',  // Specify ES Module syntax
   },
-  plugins: [
-    // List any plugins you're using
-  ],
-  overrides: [
-    {
-      files: ['*.js', '*.mjs'],  // Apply configuration to JavaScript and MJS files
-      parserOptions: {
-        ecmaVersion: 12,  // Set ECMAScript version to parse
-      },
-    },
-  ],
-  rules: {
-    'no-undef': 'error',  // Ensure that undefined variables are flagged
-    // Add or modify rules as needed
+  plugins: {
+    // Register plugins using the new object format
+    '@eslint/js': pluginJs,
   },
   extends: [
-    pluginJs.configs.recommended,  // Extend recommended ESLint configurations
+    '@eslint/js/recommended', // Use the recommended config from the '@eslint/js' plugin
   ],
+  rules: {
+    'no-undef': 'error', // Ensure that undefined variables are flagged
+    // Add or modify rules as needed
+  },
 };
