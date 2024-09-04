@@ -13,10 +13,10 @@ test.beforeEach(async () => {
   await homePage.loginWithValidCredentials();
 });
 
-test("Sorting item", async ({ page }) => {
+test("Sorting item", async () => {
   await homePage.selectOptionFromDropdown("Name (A to Z)");
 });
 
-test("Expanding side menu", async ({ page }) => {
+test("Expanding side menu", async () => {
   await homePage.clickSideMenu();
 });
