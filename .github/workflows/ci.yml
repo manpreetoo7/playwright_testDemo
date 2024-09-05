@@ -30,11 +30,11 @@ jobs:
       - name: Lint code with ESLint
         run: npx eslint .
 
-      - name: Format code with Prettier
-        run: npx prettier --check .
-
       - name: Run Prettier and fix issues
         run: npx prettier --write .
+
+      - name: Format code with Prettier
+        run: npx prettier --check .
 
       - name: Run Playwright tests
         run: npx playwright test
