@@ -38,7 +38,7 @@ export default class HomePage {
     const homePage = new HomePage(this.page);
     await this.login.navigateToLoginPage();
     await this.login.fillUsername(process.env.userid);
-    await this.login.fillPasswaord(process.env.password);
+    await this.login.fillPassword(process.env.password);
     await this.login.clickLoginButton();
     await homePage.expectPageTobeVisible();
   }
